@@ -1,0 +1,4 @@
+# Ignore lockfile and typical local artifacts; do NOT ignore package.json
+package-lock.json
+node_modules/
+.env

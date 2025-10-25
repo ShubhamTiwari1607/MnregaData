@@ -4,7 +4,6 @@ body {
   margin: 0;
   padding: 0;
 }
-
 .container {
   width: 90%;
   max-width: 1000px;
@@ -14,71 +13,106 @@ body {
   box-shadow: 0 0 10px rgba(0,0,0,0.1);
   padding: 20px;
 }
-
+#map {
+  height: 400px;
+  width: 100%;
+  border-radius: 12px;
+  margin-top: 20px;
+}
 h1 {
   text-align: center;
   color: #333;
 }
-
 .form {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 10px;
+  gap: 16px;
   margin-bottom: 20px;
 }
-
-input {
+input, button {
   padding: 10px;
-  width: 250px;
-  border: 1px solid #ccc;
   border-radius: 6px;
 }
-
+input {
+  width: 250px;
+  border: 1px solid #ccc;
+}
 button {
-  padding: 10px 20px;
   background-color: #007bff;
   border: none;
   color: white;
-  border-radius: 6px;
   cursor: pointer;
   transition: 0.2s ease;
 }
-
 button:hover {
   background-color: #0056b3;
 }
-
 #status {
   text-align: center;
   color: #666;
   font-weight: bold;
+  margin-top: 10px;
 }
-
+/* Spinner style */
+.spinner {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  border: 3px solid #ccc;
+  border-top: 3px solid #007bff;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  vertical-align: middle;
+}
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+#table-container {
+  overflow-x: auto;
+}
 table {
   width: 100%;
   border-collapse: collapse;
   margin-top: 20px;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+  min-width: 800px;
 }
-
 th, td {
   border: 1px solid #ddd;
   padding: 10px;
   text-align: left;
   font-size: 14px;
 }
-
 th {
-  background-color: #f1f1f1;
-  color: #333;
+  background: linear-gradient(90deg, #007bff 0%, #36d1c4 100%);
+  color: white;
+  letter-spacing: 1px;
 }
-
 tr:nth-child(even) {
   background-color: #f9f9f9;
 }
-
+tr:hover {
+  background-color: #e6f7ff;
+  transition: background 0.2s;
+}
+/* Card style for records (optional) */
+.card {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  margin: 8px 0;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+  padding: 14px;
+  background: #f7fbff;
+}
 @media (max-width: 600px) {
   input {
     width: 100%;
+  }
+  table {
+    min-width: 600px;
+    font-size: 12px;
   }
 }

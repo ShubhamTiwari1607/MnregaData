@@ -6,12 +6,12 @@ import { createClient } from "redis";
 const app = express();
 const PORT = 5000;
 
-// ✅ Redis client setup
+//  Redis client setup
 const redisClient = createClient({
   url: "redis://localhost:6379"
 });
 
-redisClient.on("error", (err) => console.error("❌ Redis Client Error", err));
+redisClient.on("error", (err) => console.error("Redis Client Error", err));
 await redisClient.connect(); // connect to Redis server
 
 // Middleware
@@ -35,14 +35,14 @@ app.get("/api/mgnrega", async (req, res) => {
   const cacheKey = getCacheKey(req.query);
 
   try {
-    // ✅ Check if data exists in Redis
+    // Check if data exists in Redis
     const cachedData = await redisClient.get(cacheKey);
     if (cachedData) {
-      console.log("📦 Returning cached data");
+      console.log("Returning cached data");
       return res.json(JSON.parse(cachedData));
     }
 
-    console.log("🌐 Fetching from API...");
+    console.log("Fetching from API...");
     const baseUrl = "https://api.data.gov.in/resource/ee03643a-ee4c-48c2-ac30-9f2ff26ab722";
     const apiKey = "579b464db66ec23bdd0000018454fd5ff68b4f345d0ee805160ee6fb";
 
@@ -62,9 +62,9 @@ app.get("/api/mgnrega", async (req, res) => {
     const data = await response.json();
     const records = data.records || [];
 
-    // ✅ Store data in Redis for 1 hour (3600 seconds)
+    //  Store data in Redis for 1 hour (3600 seconds)
     await redisClient.setEx(cacheKey, 3600, JSON.stringify(records));
-    console.log("💾 Data cached in Redis");
+    console.log("Data cached in Redis");
 
     res.json(records);
   } catch (err) {
@@ -75,5 +75,5 @@ app.get("/api/mgnrega", async (req, res) => {
 
 // Start server
 app.listen(PORT, () => {
-  console.log(`✅ Server running on http://localhost:${PORT}`);
+  console.log(`Server running on http://localhost:${PORT}`);
 });

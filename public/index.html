@@ -5,41 +5,24 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>MGNREGA Data Viewer</title>
   <link rel="stylesheet" href="styles.css" />
+  <link
+    rel="stylesheet"
+    href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
 </head>
 <body>
   <div class="container">
     <h1>MGNREGA Data Fetcher</h1>
-
+    <div id="map"></div>
     <form id="mgnregaForm" class="form">
-      <input
-        type="text"
-        id="state_name"
-        name="state_name"
-        placeholder="Enter State Name (e.g., UTTARAKHAND)"
-        required
-      />
-      <input
-        type="text"
-        id="fin_year"
-        name="fin_year"
-        placeholder="Enter Financial Year (e.g., 2023-2024)"
-        required
-      />
-      <input
-        type="number"
-        id="limit"
-        name="limit"
-        placeholder="Limit (e.g., 10)"
-        required
-        min="1"
-      />
+      <input type="text" id="state_name" name="state_name" placeholder="Enter State Name (e.g., UTTARAKHAND)" required />
+      <input type="text" id="fin_year" name="fin_year" placeholder="Enter Financial Year (e.g., 2023-2024)" required />
+      <input type="number" id="limit" name="limit" placeholder="Limit (e.g., 10)" required min="1" />
       <button type="submit" id="fetchBtn">Fetch Data</button>
     </form>
-
     <p id="status"></p>
     <div id="table-container"></div>
   </div>
-
-  <script src="script.js"></script>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="/script.js"></script>
 </body>
 </html>

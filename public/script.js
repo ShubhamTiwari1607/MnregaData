@@ -25,11 +25,11 @@ document.getElementById("mgnregaForm").addEventListener("submit", async (e) => {
     const records = await res.json();
 
     if (!records || records.length === 0) {
-      status.textContent = "⚠️ No data found for the given filters.";
+      status.textContent = "No data found for the given filters.";
       return;
     }
 
-    status.textContent = `✅ Fetched ${records.length} records`;
+    status.textContent = `Fetched ${records.length} records`;
 
     const table = document.createElement("table");
     const headerRow = document.createElement("tr");
@@ -54,6 +54,6 @@ document.getElementById("mgnregaForm").addEventListener("submit", async (e) => {
     tableContainer.appendChild(table);
   } catch (error) {
     console.error(error);
-    status.textContent = "❌ Error fetching data from server.";
+    status.textContent = "Error fetching data from server.";
   }
 });

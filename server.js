@@ -1,14 +1,19 @@
+import dotenv from "dotenv";
+
+dotenv.config();
+
 import express from "express";
 import cors from "cors";
 import fetch from "node-fetch";
 import { createClient } from "redis";
 
 const app = express();
-const PORT = 5000;
+const PORT = process.env.PORT || 5000;
 
 //  Redis client setup
+const redisUrl = process.env.REDIS_URL || "redis://localhost:6379";
 const redisClient = createClient({
-  url: "redis://localhost:6379"
+  url: redisUrl
 });
 
 redisClient.on("error", (err) => console.error("Redis Client Error", err));
@@ -43,8 +48,13 @@ app.get("/api/mgnrega", async (req, res) => {
     }
 
     console.log("Fetching from API...");
-    const baseUrl = "https://api.data.gov.in/resource/ee03643a-ee4c-48c2-ac30-9f2ff26ab722";
-    const apiKey = "579b464db66ec23bdd0000018454fd5ff68b4f345d0ee805160ee6fb";
+    const baseUrl = process.env.MGNREGA_BASE_URL;
+    const apiKey = process.env.MGNREGA_API_KEY;
+
+    if (!baseUrl || !apiKey) {
+      console.error("MGNREGA_BASE_URL or MGNREGA_API_KEY not set in .env");
+      return res.status(500).json({ error: "Server configuration error." });
+    }
 
     const queryParams = new URLSearchParams({
       "api-key": apiKey,
